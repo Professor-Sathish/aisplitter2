@@ -9,6 +9,9 @@ def get_marks():
 
 # Function to generate random marks
 def generate_random_marks(total_marks, mark_split, lower_bound, upper_bound):
+    # Ensure upper_bound is always greater than lower_bound
+    upper_bound = np.maximum(np.array(upper_bound), np.array(lower_bound) + 1)
+
     random_marks = np.random.randint(lower_bound, upper_bound, size=len(mark_split))
     while random_marks.sum() != total_marks:
         random_marks = np.random.randint(lower_bound, upper_bound, size=len(mark_split))
