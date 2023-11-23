@@ -1,7 +1,7 @@
 import random as ra
 import csv
 import pandas as pd
-
+import numpy as np
 #Input
 def getmarks():
     with open('inputm.csv', newline='') as f:
@@ -86,7 +86,7 @@ def ranCOS(reg, ass, assName, dep, co_lister, ms_lister):
     wm = getmarks() # read the marks
     #print(wm)
     #splitter
-    for j in wm:
+    '''for j in wm:
         ml = {}
         summ = j
         while True:
@@ -117,13 +117,30 @@ def ranCOS(reg, ass, assName, dep, co_lister, ms_lister):
                     else:
                         ml[i + 1] = ra.randint(9, ms[i])
                 else:
+                    ml[i + 1] = ms[i]'''
+
+    for j in wm:
+        ml = {}
+        summ = j
+        while True:
+            for i in range(len(ms)):
+                if j == 0:
+                    ml[i + 1] = 0
+                elif j < 41:
+                    ml[i + 1] = ra.randint(0, ms[i]) if j > 10 else ra.randint(0, 2)
+                elif 40 < j < 61:
+                    ml[i + 1] = ra.randint(5, ms[i]) if ms[i] >= 3 else ra.randint(0, ms[i])
+                elif 60 < j < 81:
+                    ml[i + 1] = ra.randint(7, ms[i]) if ms[i] >= 3 else ra.randint(1, ms[i])
+                elif 80 < j < 100:
+                    ml[i + 1] = ra.randint(9, ms[i]) if ms[i] >= 3 else ra.randint(2, ms[i])
+                else:
                     ml[i + 1] = ms[i]
 
-            #print(ml)
             if sum(ml.values()) == summ:
                 rm.append(ml)
-                #print(rm)
                 break
+
     #output
     assName = assName + ".csv"
     with open(assName, "w", newline="") as outfile:
